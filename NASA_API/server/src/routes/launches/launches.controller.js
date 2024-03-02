@@ -29,7 +29,21 @@ function httpGetAllLaunches(req, res) {
   return res.status(200).json(getAllLaunches())
 }
 
+function httpAbortLaunch(req, res) {
+  const launchId = req.params.id
+
+  // if launchId exists
+  if launchId{
+    return res.status(404).json({
+      error: 'Launch Not Found'
+    })
+  }
+  // receive iterable object and convert it to an array
+  return res.status(200).json('aborted')
+}
+
 module.exports = {
   httpAddNewLaunch,
   httpGetAllLaunches,
+  httpAbortLaunch
 }
