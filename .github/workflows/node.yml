@@ -2,15 +2,27 @@ name: NASA MERN CI
 on:
   push:
     branches: [nasa]
+  pull_request:
+    branches: [nasa]
 jobs:
   build:
+    env:
+      CI: true
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x]
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js version 16
+      # - name: Use Node.js version 16
+      - name: Use Node.js version ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          # node-version: '16'
+          # use different nod versions
+          node-version: ${{ matrix.node-version }}
+
       - name: Install Dependencies
         run: npm ci
         working-directory: NASA_API
